@@ -1,248 +1,104 @@
-# LGTM Generator-v1
-
-[![Next.js](https://img.shields.io/badge/Next.js-15.5.6-black)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19.1.0-blue)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8)](https://tailwindcss.com/)
+# lgtm-generator-v1
 
 ## Overview
 
-LGTM Generatorは、プルリクエストやコードレビューで使用できる、カスタマイズ可能なLGTM（Looks Good To Me）画像を簡単に生成・共有できるサービスです。
+A web application for generating customizable LGTM (Looks Good To Me) images. Create personalized LGTM images with custom text, colors, templates, and text positioning for use in code reviews, pull requests, and team communications.
 
-### Features (Planned)
-
-- 🎨 カスタマイズ可能なLGTM画像生成
-- 📱 レスポンシブデザイン（モバイル対応）
-- 🎭 複数のテンプレート
-- 🎨 カラーカスタマイズ
-- 💾 ダウンロード & クリップボードコピー
-- 🔗 直接リンク共有
-- 🖼️ ギャラリー機能（Phase 2）
+Features:
+- Real-time canvas preview
+- Multiple template options
+- Customizable text color and background color
+- Adjustable font size and text position
+- Undo/Redo functionality
+- Download images as PNG
+- Share via Web Share API
+- Copy shareable links with configuration
+- Automatic local storage of settings
+- History page to view previously generated images
 
 ## Tech Stack
 
-- **Framework**: Next.js 15.5.6 (App Router)
+- **Framework**: Next.js 15.5.6 with Turbopack
 - **UI Library**: React 19.1.0
-- **Language**: TypeScript 5+
-- **Styling**: Tailwind CSS 4 (PostCSS)
-- **State Management**: Zustand (to be added)
-- **Deployment**: Vercel
-- **Package Manager**: pnpm
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS 4
+- **State Management**: Zustand 5.0.8
+- **Icons**: Lucide React
+- **Testing**: Vitest with Testing Library
+- **Linting**: ESLint
+- **Formatting**: Prettier with Tailwind CSS plugin
 
-## Demo
+## Setup
 
-🚀 **Production URL**: Coming soon (Vercel deployment in progress)
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 20+ (推奨: 20.x LTS)
-- pnpm 9+ (推奨)
-
-### Installation
-
+1. Install dependencies:
 ```bash
-# Clone repository
-git clone https://github.com/co6tter/lgtm-generator-1.git
-cd lgtm-generator-v1
-
-# Install dependencies
-pnpm install
+npm install
 ```
 
-### Development
-
+2. Run the development server:
 ```bash
-# Start development server
-pnpm dev
+npm run dev
 ```
 
-開発サーバーが起動したら、ブラウザで [http://localhost:3000](http://localhost:3000) を開きます。
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Build
+## Usage
 
-```bash
-# Production build
-pnpm build
+### Basic Workflow
+1. Enter your desired text (up to 50 characters)
+2. Select a template from the available options
+3. Adjust font size using the selector
+4. Choose text position (top, middle, or bottom)
+5. Customize text and background colors
+6. Preview the generated image in real-time
+7. Download the image or share it
 
-# Start production server
-pnpm start
+### Available Commands
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
+- `npm test` - Run tests with Vitest
+- `npm run test:ui` - Run tests with UI
+- `npm run test:coverage` - Generate test coverage report
+
+### Features
+- **Undo/Redo**: Use Ctrl+Z / Ctrl+Y or the UI buttons
+- **Auto-save**: All changes are automatically saved to local storage
+- **Copy Link**: Generate a shareable URL with your configuration
+- **Share**: Use the native share functionality (on supported devices)
+- **History**: View previously generated LGTM images on the `/history` page
+
+## Directory Structure
+
 ```
-
-## Project Structure
-
+src/
+├── app/                    # Next.js App Router pages
+│   ├── history/           # History page
+│   ├── page.tsx           # Home page
+│   └── layout.tsx         # Root layout
+├── components/            # React components
+│   ├── actions/           # Action buttons (Download, Share, etc.)
+│   ├── common/            # Reusable UI components
+│   ├── editor/            # Editor-specific components
+│   ├── layout/            # Layout components
+│   └── pages/             # Page-level components
+├── constants/             # Application constants
+│   ├── colors.ts          # Color presets
+│   ├── defaults.ts        # Default configuration
+│   └── templates.ts       # Template definitions
+├── lib/                   # Utility libraries
+│   ├── canvas/            # Canvas rendering logic
+│   ├── hooks/             # Custom React hooks
+│   ├── storage/           # Local storage utilities
+│   └── utils/             # General utilities
+├── store/                 # Zustand state management
+│   ├── editorStore.ts     # Editor state
+│   └── uiStore.ts         # UI state
+└── types/                 # TypeScript type definitions
 ```
-lgtm-generator-v1/
-├── src/
-│   ├── app/              # Next.js App Router
-│   ├── components/       # React components (to be added)
-│   ├── lib/              # Core library code (to be added)
-│   ├── store/            # Zustand stores (to be added)
-│   ├── types/            # TypeScript types (to be added)
-│   └── constants/        # Constants & config (to be added)
-├── public/               # Static assets
-├── docs/                 # Documentation
-└── tests/                # Tests (to be added)
-```
-
-詳細は [docs/05_architecture.md](docs/05_architecture.md) を参照してください。
-
-## Scripts
-
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | 開発サーバー起動（Turbopack使用） |
-| `pnpm build` | 本番ビルド（Turbopack使用） |
-| `pnpm start` | 本番サーバー起動 |
-| `pnpm lint` | ESLintによるコードチェック |
-| `pnpm test` | テスト実行（Vitest） |
-| `pnpm test:ui` | テストUIで実行 |
-| `pnpm test:coverage` | カバレッジレポート生成 |
-
-## Documentation
-
-詳細なドキュメントは [docs/](docs/) ディレクトリを参照してください。
-
-- [Requirements](docs/01_requirements.md) - 要件定義
-- [UI/UX Design](docs/02_uiux-design.md) - UI/UX設計
-- [Data Design](docs/03_data-design.md) - データ設計
-- [API Design](docs/04_api-design.md) - API設計
-- [Architecture](docs/05_architecture.md) - アーキテクチャ設計
-
-## Roadmap
-
-### Phase 1 - MVP (Current)
-
-- [ ] 基本的な画像生成機能
-- [ ] テンプレート実装（3-5種類）
-- [ ] カスタマイズUI
-- [ ] ダウンロード機能
-- [ ] URLシェア機能
-
-### Phase 2 - Enhanced
-
-- [ ] ギャラリー機能
-- [ ] Vercel KV統合
-- [ ] サーバーサイド画像生成
-- [ ] 統計情報
-
-### Phase 3 - Community
-
-- [ ] ユーザー認証
-- [ ] カスタムテンプレート投稿
-- [ ] お気に入り機能
-
-## Dependencies to Add
-
-Phase 1の実装に必要な追加ライブラリ：
-
-```bash
-# State management
-pnpm add zustand
-
-# Icons
-pnpm add lucide-react
-
-# Development tools (optional)
-pnpm add -D prettier @ianvs/prettier-plugin-sort-imports
-```
-
-Phase 2で追加予定：
-
-```bash
-# Vercel KV
-pnpm add @vercel/kv
-
-# Server-side image generation
-pnpm add @vercel/og
-```
-
-## Configuration
-
-### Environment Variables
-
-開発環境用の `.env.local` ファイルを作成：
-
-```bash
-# .env.local
-NEXT_PUBLIC_BASE_URL=http://localhost:3000
-NODE_ENV=development
-```
-
-本番環境（Vercel）では自動的に設定されます。
-
-## Deployment
-
-### Vercel
-
-このプロジェクトはVercelへのデプロイを想定しています。
-
-#### 自動デプロイ
-
-1. GitHubリポジトリをVercelにインポート
-2. 環境変数を設定（必要に応じて）
-3. mainブランチへのプッシュで自動デプロイ
-
-#### 設定ファイル
-
-- `vercel.json`: Vercel固有の設定（セキュリティヘッダー、リージョン設定）
-- `next.config.ts`: Next.js設定（standalone output、圧縮有効化）
-
-#### 本番ビルドの検証
-
-デプロイ前にローカルで本番ビルドを確認：
-
-```bash
-# ビルド & リント & 型チェック
-pnpm build
-pnpm lint
-pnpm exec tsc --noEmit
-
-# 本番サーバー起動
-pnpm start
-```
-
-### TypeScript Path Alias
-
-`tsconfig.json` で設定済み：
-
-```json
-{
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
-}
-```
-
-`@/` プレフィックスで `src/` 配下をインポート可能：
-
-```typescript
-import { Button } from '@/components/common/Button';
-import type { LGTMConfig } from '@/types/config';
-```
-
-## Contributing
-
-1. このリポジトリをフォーク
-2. Feature branchを作成 (`git checkout -b feature/amazing-feature`)
-3. 変更をコミット (`git commit -m 'Add some amazing feature'`)
-4. Branchにプッシュ (`git push origin feature/amazing-feature`)
-5. Pull Requestを作成
 
 ## License
 
-TBD (MITを推奨)
-
-## Author
-
-[@co6tter](https://github.com/co6tter)
-
-## Acknowledgments
-
-- [Next.js](https://nextjs.org/)
-- [Vercel](https://vercel.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Zustand](https://github.com/pmndrs/zustand)
+This repository is for personal/private use only.
